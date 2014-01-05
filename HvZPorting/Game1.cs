@@ -85,11 +85,16 @@ namespace HumansVsZombies.cs
         MapTile mt00;
         MapTile mt01;
         MapTile mt02;
-        MapTile mt03;
+       // MapTile mt03;
         MapTile mt10;
         MapTile mt11;
         MapTile mt12;
-        MapTile mt13;
+        //MapTile mt13;
+
+        MapTile mt20;
+        MapTile mt21;
+        MapTile mt22;
+
 
         MapTile currentMaptile;
 
@@ -186,28 +191,37 @@ namespace HumansVsZombies.cs
             //The HUD rectangle object
             _h = new GamePiece(-9, -1, 480, 110);
             scoreTimer = 0;
-            // Create the map objects
-            mt00 = new MapTile(3, 1, gameWidth, gameHeight, this.Content.Load<Texture2D>("TopLeft"));
-            mt01 = new MapTile(1, 0, gameWidth, gameHeight, this.Content.Load<Texture2D>("TopRight"));
-            mt02 = new MapTile(2, 1, gameWidth, gameHeight, this.Content.Load<Texture2D>("grass"));
-            mt03 = new MapTile(5, 0, gameWidth, gameHeight, this.Content.Load<Texture2D>("grass"));
-            mt10 = new MapTile(2, 1, gameWidth, gameHeight, this.Content.Load<Texture2D>("BotLeft"));
-            mt11 = new MapTile(3, 0, gameWidth, gameHeight, this.Content.Load<Texture2D>("BotRight"));
-            mt12 = new MapTile(0, 2, gameWidth, gameHeight, this.Content.Load<Texture2D>("road"));
-            mt13 = new MapTile(4, 0, gameWidth, gameHeight, this.Content.Load<Texture2D>("road"));
+            // Create the map objects (It is important to note that the first digit is the Y value, while the second is the X)
+            mt00 = new MapTile(3, 1, gameWidth, gameHeight, this.Content.Load<Texture2D>("00"));
+            mt01 = new MapTile(1, 0, gameWidth, gameHeight, this.Content.Load<Texture2D>("01"));
+            mt02 = new MapTile(1, 0, gameWidth, gameHeight, this.Content.Load<Texture2D>("02"));
 
+            //mt02 = new MapTile(2, 1, gameWidth, gameHeight, this.Content.Load<Texture2D>("grass"));
+            //mt03 = new MapTile(5, 0, gameWidth, gameHeight, this.Content.Load<Texture2D>("grass"));
+            mt10 = new MapTile(2, 1, gameWidth, gameHeight, this.Content.Load<Texture2D>("10"));
+            mt11 = new MapTile(3, 0, gameWidth, gameHeight, this.Content.Load<Texture2D>("11"));
+            mt12 = new MapTile(3, 0, gameWidth, gameHeight, this.Content.Load<Texture2D>("12"));
+
+            //mt12 = new MapTile(0, 2, gameWidth, gameHeight, this.Content.Load<Texture2D>("road"));
+            mt20 = new MapTile(2, 1, gameWidth, gameHeight, this.Content.Load<Texture2D>("20"));
+            mt21 = new MapTile(3, 0, gameWidth, gameHeight, this.Content.Load<Texture2D>("21"));
+            mt22 = new MapTile(3, 0, gameWidth, gameHeight, this.Content.Load<Texture2D>("22"));
 
             // Then add them to the list to reference by number
             listofMaptiles = new List<MapTile>();
             listofMaptiles.Add(mt00);
             listofMaptiles.Add(mt01);
             listofMaptiles.Add(mt02);
-            listofMaptiles.Add(mt03);
+            //listofMaptiles.Add(mt03);
 
             listofMaptiles.Add(mt10);
             listofMaptiles.Add(mt11);
             listofMaptiles.Add(mt12);
-            listofMaptiles.Add(mt13);
+            //listofMaptiles.Add(mt13);
+
+            listofMaptiles.Add(mt20);
+            listofMaptiles.Add(mt21);
+            listofMaptiles.Add(mt22);
 
             // And also to a dictionary for reference by name for their number that references which
             // Maptile its connected to
@@ -504,25 +518,51 @@ namespace HumansVsZombies.cs
             mt01.GetSetBarrierRight1.GetSetMaptileNumber = dictionaryofMaptiles[mt02];
 
             mt02.GetSetBarrierLeft3.GetSetMaptileNumber = dictionaryofMaptiles[mt01];
-            mt02.GetSetBarrierRight1.GetSetMaptileNumber = dictionaryofMaptiles[mt03];
             mt02.GetSetBarrierDown2.GetSetMaptileNumber = dictionaryofMaptiles[mt12];
 
-            mt03.GetSetBarrierLeft3.GetSetMaptileNumber = dictionaryofMaptiles[mt02];
-            mt03.GetSetBarrierDown2.GetSetMaptileNumber = dictionaryofMaptiles[mt13];
+
+            //mt01.GetSetBarrierRight1.GetSetMaptileNumber = dictionaryofMaptiles[mt02];
+
+            //mt02.GetSetBarrierLeft3.GetSetMaptileNumber = dictionaryofMaptiles[mt01];
+            //mt02.GetSetBarrierRight1.GetSetMaptileNumber = dictionaryofMaptiles[mt03];
+            //mt02.GetSetBarrierDown2.GetSetMaptileNumber = dictionaryofMaptiles[mt12];
+
+            //mt03.GetSetBarrierLeft3.GetSetMaptileNumber = dictionaryofMaptiles[mt02];
+            //mt03.GetSetBarrierDown2.GetSetMaptileNumber = dictionaryofMaptiles[mt13];
 
             mt10.GetSetBarrierUp0.GetSetMaptileNumber = dictionaryofMaptiles[mt00];
             mt10.GetSetBarrierRight1.GetSetMaptileNumber = dictionaryofMaptiles[mt11];
+            mt10.GetSetBarrierDown2.GetSetMaptileNumber = dictionaryofMaptiles[mt20];
 
             mt11.GetSetBarrierLeft3.GetSetMaptileNumber = dictionaryofMaptiles[mt10];
             mt11.GetSetBarrierUp0.GetSetMaptileNumber = dictionaryofMaptiles[mt01];
             mt11.GetSetBarrierRight1.GetSetMaptileNumber = dictionaryofMaptiles[mt12];
+            mt11.GetSetBarrierDown2.GetSetMaptileNumber = dictionaryofMaptiles[mt22];
 
             mt12.GetSetBarrierLeft3.GetSetMaptileNumber = dictionaryofMaptiles[mt11];
             mt12.GetSetBarrierUp0.GetSetMaptileNumber = dictionaryofMaptiles[mt02];
-            mt12.GetSetBarrierRight1.GetSetMaptileNumber = dictionaryofMaptiles[mt13];
+            mt12.GetSetBarrierDown2.GetSetMaptileNumber = dictionaryofMaptiles[mt22];
 
-            mt13.GetSetBarrierLeft3.GetSetMaptileNumber = dictionaryofMaptiles[mt12];
-            mt13.GetSetBarrierUp0.GetSetMaptileNumber = dictionaryofMaptiles[mt03];
+            //mt20.GetSetBarrierLeft3.GetSetMaptileNumber = dictionaryofMaptiles[mt11];
+            mt20.GetSetBarrierUp0.GetSetMaptileNumber = dictionaryofMaptiles[mt10];
+            mt20.GetSetBarrierRight1.GetSetMaptileNumber = dictionaryofMaptiles[mt21];
+
+
+            mt21.GetSetBarrierUp0.GetSetMaptileNumber = dictionaryofMaptiles[mt11];
+            mt21.GetSetBarrierRight1.GetSetMaptileNumber = dictionaryofMaptiles[mt22];
+            mt21.GetSetBarrierLeft3.GetSetMaptileNumber = dictionaryofMaptiles[mt20];
+
+            mt22.GetSetBarrierUp0.GetSetMaptileNumber = dictionaryofMaptiles[mt12];
+            mt22.GetSetBarrierLeft3.GetSetMaptileNumber = dictionaryofMaptiles[mt21];
+
+           // mt11.GetSetBarrierRight1.GetSetMaptileNumber = dictionaryofMaptiles[mt12];
+
+            //mt12.GetSetBarrierLeft3.GetSetMaptileNumber = dictionaryofMaptiles[mt11];
+            //mt12.GetSetBarrierUp0.GetSetMaptileNumber = dictionaryofMaptiles[mt02];
+            //mt12.GetSetBarrierRight1.GetSetMaptileNumber = dictionaryofMaptiles[mt13];
+
+            //mt13.GetSetBarrierLeft3.GetSetMaptileNumber = dictionaryofMaptiles[mt12];
+            //mt13.GetSetBarrierUp0.GetSetMaptileNumber = dictionaryofMaptiles[mt03];
         }
 
         #endregion
